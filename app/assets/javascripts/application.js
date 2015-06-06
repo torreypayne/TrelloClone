@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui/sortable
 //= require underscore
+//= require jquery.serializejson
 //= require backbone
 //= require bootstrap
 //= require trello_clone
@@ -21,6 +22,7 @@
 //= require backbone
 //= require trello_clone
 //= require_tree ../templates
+//= require_tree ./utils
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views

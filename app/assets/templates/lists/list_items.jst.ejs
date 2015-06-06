@@ -1,0 +1,12 @@
+<h3><%= list.escape('title') %></h3>
+
+<ul class="list-show">
+  <% if (list.cards) { %>
+
+    <% _(list.cards().models).each(function(card) { %>
+      <li><%= card.escape('title') %></li>
+      <li><%= card.escape('description') %></li>
+
+    <% }) %>
+  <% } %>
+</ul>

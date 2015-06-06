@@ -1,0 +1,12 @@
+<ul class="board board-index">
+  <% boards.each(function(board) { %>
+    <li><a href="#/boards/<%=board.id%>"><%= board.escape('title') %></a></li>
+    <% }); %>
+</ul>
+
+<h2>Create Board</h2>
+
+
+<label for="title">Title</label>
+<input type="text" class="new-board" name="board[title]" value='Like "Vacation Plans"...'>
+<button type="submit">Create</button>
