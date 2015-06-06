@@ -4,7 +4,13 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
 
   initialize: function(options) {
     // this.model = options.board;
-    this.listenTo(this.model, 'sync', this.render);
+
+    // Whoa. If I don't turn off the listener to my model, I get an error
+    // from my render function. Is this because it tries to update the
+    // subviews, 'setting' them with 'parsed' data on the second render
+    // when in fact the update actually deletes them?
+
+    // this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.lists(), 'add', this.addListSubview);
     this.model.lists().each(function(list) {
       this.addListSubview(list);
@@ -41,13 +47,13 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
   render: function() {
     // var boardShow = this.template({ board: this.model });
     // this.$el.html(boardShow);
-    this.$el.html(this.template({board: this.model}));
+    this.$el.html(this.template({ board: this.model }));
     this.attachSubviews();
     return this;
   },
 
   // remove: function() {
-  //   this.remove();
+  //   this.$el.remove();
   //   this.model.destroy();
   // }
 

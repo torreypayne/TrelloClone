@@ -20,6 +20,6 @@ TrelloClone.Collections.Lists = Backbone.Collection.extend({
     return list;
   },
 
-  cards: function() {}
+  // cards: function() {}
 
 });
