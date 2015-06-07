@@ -8,11 +8,11 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     'click btn.card-delete' : 'removeCard',
     'click button.btn-add': 'newCard',
     'submit form.card-create': 'addCard',
-    'click button.btn-remove': 'remove',
+    // 'click button.btn-remove': 'remove',
   },
 
   initialize: function(options) {
-    this.listenTo(this.model, 'sync sort', this.render);
+    this.listenTo(this.model, 'sync sort remove', this.render);
     this.listenTo(this.model.cards(), 'sync add', this.addCardSubview);
     this.model.cards().each(function(card) {
       // Make cardView
@@ -34,10 +34,10 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     return this;
   },
 
-  remove: function() {
-    this.$el.remove();
-    this.model.destroy();
-  },
+  // remove: function() {
+  //   this.$el.remove();
+  //   this.model.destroy();
+  // },
 
   addCardSubview: function(card) {
     var cardItem = new TrelloClone.Views.CardShow({ model: card });
@@ -65,10 +65,14 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     });
   },
 
-  deleteCard: function(event) {
-    var listView = this;
-    event.preventDefault();
-    var deletedItem = event;
+  removeCardSubview: function(card) {
+    this.removeModelSubview('div.card-create-form', card);
   }
+
+  // deleteCard: function(event) {
+  //   var listView = this;
+  //   event.preventDefault();
+  //   var deletedItem = event;
+  // }
 
 });
