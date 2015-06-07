@@ -4,10 +4,10 @@ TrelloClone.Models.Board = Backbone.Model.extend({
 
   parse: function(response) {
     if (response.lists) {
-      this.lists().set(response.lists);
+      this.lists().set(response.lists).sort();
       this.lists().each(function(list, idx) {
         if (list.cards) {
-          list.cards().set(response.lists[idx].cards);
+          list.cards().set(response.lists[idx].cards).sort();
         }
       });
       delete response.lists;
@@ -20,6 +20,6 @@ TrelloClone.Models.Board = Backbone.Model.extend({
       this._lists = new TrelloClone.Collections.Lists([], { board: this });
     }
 
-    return this._lists;
+    return this._lists.sort();
   }
 });

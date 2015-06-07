@@ -1,0 +1,33 @@
+
+body {
+  background: #3333FF;
+}
+
+.board-show ul {
+  background: #D0D0D0;
+}
+
+ul .list-item {
+  background: #ccc;
+  border-radius: 6%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+ul .list-show {
+  border-radius: 6%;
+  padding-bottom: 20px;
+}
+
+.list-item h2 {
+  text-align: center;
+}
+
+.list-show button {
+  z-position: -1;
+}
+
+.list-show button:hover {
+  z-position: 1;
+  display: block;
+}

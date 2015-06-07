@@ -1,4 +1,9 @@
-<h3><%= list.escape('title') %></h3>
+<h2><%= list.escape('title') %></h2>
+
+<button type="submit" class="btn btn-delete btn-danger delete-list">Delete List!</button>
+
+<button type="submit" class="btn btn-add card-add" width="150px">Create New Card!</button>
+<div class="card-create-form"></div>
 
 <ul class="list-show">
   <% if (list.cards) { %>

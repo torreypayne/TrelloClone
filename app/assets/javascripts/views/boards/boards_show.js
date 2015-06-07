@@ -9,9 +9,13 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     // from my render function. Is this because it tries to update the
     // subviews, 'setting' them with 'parsed' data on the second render
     // when in fact the update actually deletes them?
+    // Edit: this was completely untrue and I was in fact just very fatigued
+    // and lazy.
 
     // this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.lists(), 'add', this.addListSubview);
+    this.listenTo(this.model.lists(), 'remove', this.removeListSubview);
+    this.listenTo(this.model.lists(), 'sort', this.render);
     this.model.lists().each(function(list) {
       this.addListSubview(list);
     }.bind(this));
@@ -19,7 +23,9 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
 
   events: {
     'click button.btn-remove': 'remove',
-    'submit form': 'addList'
+    'submit form.create-list': 'addList',
+    'click button.delete-list': 'removeList'
+    // 'click a' : 'removeBoardSubview'
     // 'click button.btn-add-list': 'addList'
   },
 
@@ -44,6 +50,7 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     });
   },
 
+
   render: function() {
     // var boardShow = this.template({ board: this.model });
     // this.$el.html(boardShow);
@@ -51,6 +58,10 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     this.attachSubviews();
     return this;
   },
+
+  removeListSubview: function (list) {
+    this.removeModelSubview("ul.board-show", list);
+  }
 
   // remove: function() {
   //   this.$el.remove();
