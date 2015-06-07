@@ -1,6 +1,17 @@
 
 body {
-  background: #3333FF;
+  background: #3366FF;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 800;
+  color: aliceblue;
+}
+
+a {
+  font-style: oblique;
+  font-size: 64px;
 }
 
 .board-show ul {
@@ -29,5 +40,10 @@ ul .list-show {
 
 .list-show button:hover {
   z-position: 1;
+  display: block;
+}
+
+form.create-list {
+  margin-left: 100px;
   display: block;
 }

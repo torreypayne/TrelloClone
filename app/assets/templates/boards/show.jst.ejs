@@ -1,11 +1,11 @@
-<h2><%= board.escape('title') %></h2>
+<h1><%= board.escape('title') %></h1>
 
 
 <form class="create-list" action="#">
-  <label for="list-title">Create a New List</label>
-  <input type="text" name="title" value="Got something you can't forget about?">
-  <button type="submit" class="btn btn-add-list btn-lg" name="button"></button>
-</form>
+  <label for="list-title">Create a New List</label><br>
+  <textarea name="title">Add a list...</textarea>
+  <button type="submit" class="btn btn-add-list btn-lg" name="button">Add List</button>
+</form><br>
 
 <ul class="board-show">
   <p class="payne">
