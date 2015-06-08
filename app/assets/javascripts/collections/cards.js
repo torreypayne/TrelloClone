@@ -18,6 +18,10 @@ TrelloClone.Collections.Cards = Backbone.Collection.extend({
       });
       return card;
     }
+  },
+
+  comparator: function(card) {
+    return card.get('ord');
   }
 
 });

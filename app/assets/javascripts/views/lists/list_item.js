@@ -2,13 +2,15 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
 
   template: JST['lists/list_items'],
 
+  newCardTemplate: JST['cards/new'],
+
   className: 'list-item',
 
   events: {
     'click btn.card-delete' : 'removeCard',
     'click button.btn-add': 'newCard',
     'submit form.card-create': 'addCard',
-    'click button.btn-remove': 'deleteCard',
+    // 'click button.btn-remove': 'deleteCard',
   },
 
   initialize: function(options) {
@@ -21,14 +23,21 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
   },
 
   render: function() {
+    $('.list-show').sortable();
     var listView = this.template({ list: this.model });
     this.attachSubviews();
-    this.$el.html(listView);
+    this.$el.html(listView) //.sortable();
 
     this.$el.css({
       'float' : 'left',
       'hover' : 'true'
     });
+    var newCard = new TrelloClone.Models.Card();
+    var newCardView = this.newCardTemplate({
+      card: newCard,
+      list: this.model
+    });
+    this.$('div.card-create-form').html(newCardView).toggle(false);
     return this;
   },
 
@@ -37,11 +46,21 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     this.addSubview('ul.list-show', cardItem);
   },
 
-  newCard: function(event) {
-    this.$('div.card-create-form').append(
-      $("<form class='card-create' action='api/cards'><label for='title'>Title</label><br><input type='text' id='title' name='card[title]'><br><label for='desc'>Description</label><br><input type='textarea' id='desc' name='card[description]'><br><br><button type='submit'>Create Your New Card!</button><br></form><br>")
-      .css('display', 'block').css('float', 'left').css('clear', 'both').toggle()
-    );
+  newCard: function() {
+    // var newCard = new TrelloClone.Models.Card();
+    // // newCard.list_id = this.id;
+    // var newCardView = this.newCardTemplate({
+    //   card: newCard,
+    //   list: this.model
+    // });
+    // this._swapView(newCardView);
+    // not done
+    this.$('div.card-create-form').toggle();
+
+    // this.$('div.card-create-form').append(
+    //   $("<form class='card-create' action='api/cards'><label for='title'>Title</label><br><input type='text' id='title' name='card[title]'><br><label for='desc'>Description</label><br><input type='textarea' id='desc' name='card[description]'><br><br><button type='submit'>Create Your New Card!</button><br></form><br>")
+    //   .css('display', 'block').css('float', 'left').css('clear', 'both').toggle()
+    // );
   },
 
   addCard: function(event) {
@@ -49,12 +68,15 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     event.preventDefault();
     var newItem = this.$('form').serializeJSON();
     newItem.list_id = this.model.id;
-    console.log(newCard);
     var newCard = new TrelloClone.Models.Card(newItem);
+    console.log(newCard);
     newCard.save({}, {
       success: function() {
         listView.addCardSubview(newCard);
-      }.bind(this)
+      }.bind(this),
+      error: function() {
+        this.$el.effect('highlight');
+      }
     });
   },
 

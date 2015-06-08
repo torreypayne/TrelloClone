@@ -13,9 +13,9 @@ module Api
     end
 
     def destroy
-      card = card.find(params[:id])
+      card = Card.find(params[:id])
       card.destroy
-      return card
+      render json: card
     end
 
     def update

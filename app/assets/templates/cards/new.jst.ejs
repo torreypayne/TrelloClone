@@ -1,0 +1,11 @@
+<form class='card-create' action='api/cards'>
+
+  <label for='title'>Title</label><br>
+  <input type='text' class='form-control' id='title' name='card[title]'><br>
+
+  <label for='desc'>Description</label><br>
+  <input type='textarea' id='desc' class='form-control' name='card[description]'><br><br>
+  <input type="hidden" name="card[list_id]" value="<%= list.get('id') %>">
+
+  <button class='btn btn-default' type='submit'>Create Your New Card!</button><br>
+</form>

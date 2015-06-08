@@ -1,5 +1,9 @@
 TrelloClone.Views.CardShow = Backbone.View.extend({
 
+  comparator: function() {
+    return card.get('title');
+  },
+
   template: JST['cards/card'],
 
   events: {
@@ -12,19 +16,22 @@ TrelloClone.Views.CardShow = Backbone.View.extend({
 
   render: function() {
     var cardShow = this.template({ card: this.model });
-    this.$el.html(cardShow).sortable().draggable().droppable().css('background', '#F8F8F8');
+    this.$el.html(cardShow) //.sortable().css('background', '#F8F8F8');
     return this;
   },
 
-  removeCardSubview: function(card) {
-    this.removeModelSubview(card);
-    card.destroy();
-  },
+  // removeCardSubview: function(card) {
+  //   this.removeModelSubview(card);
+  //   card.destroy();
+  // },
 
   destroyCard: function(event) {
+    event.preventDefault();
+    console.log('hit here');
     // var $target = $(event.currentTarget);
-    this.remove();
+    // card = this.collection.getOrFetch($target.attrs('data-id'));
     this.model.destroy();
+    this.remove();
     // debugger;
   }
 
