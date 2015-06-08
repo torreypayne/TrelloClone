@@ -21,8 +21,6 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend({
     event.preventDefault();
     boardView = this;
     var boardData = $('input.new-board').serializeJSON();
-    // where do I get the user_id? Navbar knows about currentUser...
-    // boardData.user_id
     var newBoard = new TrelloClone.Models.Board(boardData);
     newBoard.save({},{
       success: function() {

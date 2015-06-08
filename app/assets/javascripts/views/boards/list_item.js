@@ -8,15 +8,14 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     'click btn.card-delete' : 'removeCard',
     'click button.btn-add': 'newCard',
     'submit form.card-create': 'addCard',
-    // 'click button.btn-remove': 'remove',
+    'click button.btn-remove': 'deleteCard',
   },
 
   initialize: function(options) {
     this.listenTo(this.model, 'sync sort remove', this.render);
     this.listenTo(this.model.cards(), 'sync add', this.addCardSubview);
+    this.listenTo(this.model.cards(), 'remove', this.removeCardSubview);
     this.model.cards().each(function(card) {
-      // Make cardView
-      // var cardShow = new TrelloClone.Views.CardShow({ model: card });
       this.addCardSubview(card);
     }.bind(this));
   },
@@ -30,24 +29,18 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
       'float' : 'left',
       'hover' : 'true'
     });
-    // this.addCardSubview($('ul.list-show'), listView);
     return this;
   },
 
-  // remove: function() {
-  //   this.$el.remove();
-  //   this.model.destroy();
-  // },
-
   addCardSubview: function(card) {
     var cardItem = new TrelloClone.Views.CardShow({ model: card });
-    this.addSubview($('ul.list-show'), cardItem);
+    this.addSubview('ul.list-show', cardItem);
   },
 
   newCard: function(event) {
     this.$('div.card-create-form').append(
       $("<form class='card-create' action='api/cards'><label for='title'>Title</label><br><input type='text' id='title' name='card[title]'><br><label for='desc'>Description</label><br><input type='textarea' id='desc' name='card[description]'><br><br><button type='submit'>Create Your New Card!</button><br></form><br>")
-      .css('display', 'block').css('float', 'left').css('clear', 'both')
+      .css('display', 'block').css('float', 'left').css('clear', 'both').toggle()
     );
   },
 
@@ -66,13 +59,13 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
   },
 
   removeCardSubview: function(card) {
-    this.removeModelSubview('div.card-create-form', card);
-  }
+    this.removeModelSubview('div.list-show', card);
+  },
 
-  // deleteCard: function(event) {
-  //   var listView = this;
-  //   event.preventDefault();
-  //   var deletedItem = event;
-  // }
+  deleteCard: function(event) {
+    var listView = this;
+    event.preventDefault();
+    var deletedItem = event;
+  }
 
 });
