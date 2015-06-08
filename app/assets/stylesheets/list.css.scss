@@ -31,15 +31,15 @@ a {
 
 .board-show ul {
   background: #d6dadc;
-  // opacity: 0.9;
 }
 
 ul .list-item {
   opacity: 0.8;
   background: #d6dadc;
-  border-radius: 6%;
+  border-radius: 3%;
   margin-left: 10px;
   margin-right: 10px;
+  border-style: solid;
 }
 
 ul .list-show {
@@ -65,17 +65,17 @@ form.create-list {
 
 .list-show div {
   clear: both;
+  position: initial;
+  margin-right: 10px;
   border-style: ridge;
   border-width: thin;
   text-align: center;
-  // margin-bottom: 10px;
-  // margin-right: 15px;
-  // padding-bottom: 10px;
 }
 
-// .card-show * {
-//   margin: 10px;
-// }
+div.card-show {
+  border: none;
+}
+
 
 .card-show button {
   display: none;
@@ -83,6 +83,7 @@ form.create-list {
 
 .list-item button.card-add {
   margin-left: 38px;
+  margin-bottom: 10px;
 }
 
 .list-item button.btn-delete {
