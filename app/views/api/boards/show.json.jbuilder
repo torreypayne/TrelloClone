@@ -8,3 +8,7 @@ json.extract! @board, :title, :id
 json.lists @board.lists do |json, list|
   json.(list, :title, :id, :cards)
 end
+
+json.members @board.members do |json, member|
+  json.(member, :email, :id)
+end

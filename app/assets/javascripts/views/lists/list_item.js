@@ -10,7 +10,22 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     'click btn.card-delete' : 'removeCard',
     'click button.btn-add': 'newCard',
     'submit form.card-create': 'addCard',
+    'sortreceive .list-show': 'addCardToList',
+    'sortremove .list-show': 'removeCardFromList'
     // 'click button.btn-remove': 'deleteCard',
+  },
+
+  updateLists: function(event) {
+    var $target = $(event.currentTarget);
+    var $card = $(event.delegateTarget);
+    var card;
+    this.collection.each(function(list) {
+      list.each(function(otherCard) {
+        if otherCard.id === $card.id
+      })
+    });
+    debugger;
+    // var oldList =
   },
 
   initialize: function(options) {
@@ -23,7 +38,6 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
   },
 
   render: function() {
-    $('.list-show').sortable();
     var listView = this.template({ list: this.model });
     this.attachSubviews();
     this.$el.html(listView) //.sortable();
@@ -38,6 +52,9 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
       list: this.model
     });
     this.$('div.card-create-form').html(newCardView).toggle(false);
+    setTimeout(function () {
+      $('.list-show').sortable({ connectWith: '.list-show' });
+    }, 0);
     return this;
   },
 

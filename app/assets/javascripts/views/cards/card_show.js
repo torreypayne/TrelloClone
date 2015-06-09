@@ -1,5 +1,9 @@
 TrelloClone.Views.CardShow = Backbone.View.extend({
 
+  initialize: function(options) {
+    
+  },
+
   comparator: function() {
     return card.get('title');
   },
@@ -20,11 +24,6 @@ TrelloClone.Views.CardShow = Backbone.View.extend({
     return this;
   },
 
-  // removeCardSubview: function(card) {
-  //   this.removeModelSubview(card);
-  //   card.destroy();
-  // },
-
   destroyCard: function(event) {
     event.preventDefault();
     console.log('hit here');
@@ -33,6 +32,8 @@ TrelloClone.Views.CardShow = Backbone.View.extend({
     this.model.destroy();
     this.remove();
     // debugger;
-  }
+  },
+
+
 
 });
