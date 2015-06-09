@@ -15,9 +15,8 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     // 'click button.btn-remove': 'deleteCard',
   },
 
-  updateLists: function(event) {
+  addCardToList: function(event) {
     var $target = $(event.currentTarget);
-    var $card = $(event.delegateTarget);
     var card;
     this.collection.each(function(list) {
       list.each(function(otherCard) {
@@ -26,6 +25,10 @@ TrelloClone.Views.ListItem = Backbone.CompositeView.extend({
     });
     debugger;
     // var oldList =
+  },
+
+  removeCardFromList: function(event) {
+    var $target = $(event.currentTarget);
   },
 
   initialize: function(options) {
